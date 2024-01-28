@@ -20,6 +20,25 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class Boton extends StatelessWidget {
+  final String texto;
+  final VoidCallback onPressed;
+
+  const Boton({required this.texto, required this.onPressed, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.grey[800],
+      ),
+      child: Text(texto),
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -33,18 +52,21 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+      print('Contador incrementado: $_counter');
     });
   }
 
   void _resetCounter() {
     setState(() {
       _counter = 0;
+      print('Contador reseteado a $_counter');
     });
   }
 
   void _decrementCounter() {
     setState(() {
       _counter--;
+      print('Contador decrementado: $_counter');
     });
   }
 
@@ -78,33 +100,21 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          const SizedBox(height: 100.0),
+          const SizedBox(height: 186.0),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              ElevatedButton(
+              Boton(
+                texto: '+',
                 onPressed: _incrementCounter,
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.grey[800],
-                ),
-                child: const Text('+'),
               ),
-              ElevatedButton(
+              Boton(
+                texto: 'RESET',
                 onPressed: _resetCounter,
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.grey[800],
-                ),
-                child: const Text('RESET'),
               ),
-              ElevatedButton(
+              Boton(
+                texto: '-',
                 onPressed: _decrementCounter,
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.grey[800],
-                ),
-                child: const Text('-'),
               ),
             ],
           ),
@@ -121,4 +131,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
